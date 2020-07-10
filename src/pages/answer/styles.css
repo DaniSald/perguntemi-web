@@ -1,0 +1,19 @@
+@font-face {
+  font-family: magnoliaScript;
+  src: url("../../assets/fonts/magnolia-script.regular.otf");
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  flex-direction: column;
+}
+
+.paragraph {
+  font-size: 25px;
+  font-family: ubuntu;
+}
