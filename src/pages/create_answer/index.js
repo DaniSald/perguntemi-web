@@ -49,7 +49,7 @@ class createAnswer extends Component {
       window.alert('Resposta Criada!');
       history.push('/');
     } catch (error) {
-      console.log(error);
+      window.alert('Algo deu errado\nPor favor tente novamente.');
     }
   }
 
