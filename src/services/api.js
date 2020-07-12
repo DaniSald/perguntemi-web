@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = axios.create({ baseURL: '<BASE_URL>' });
+const baseUrl = axios.create({ baseURL: 'http://localhost:9988' });
 
 const Api = {
   async getAnswer() {
