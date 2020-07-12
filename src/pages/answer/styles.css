@@ -3,7 +3,7 @@
   src: url("../../assets/fonts/magnolia-script.regular.otf");
 }
 
-.answer {
+.answer_wrap {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,16 @@
   flex-direction: column;
 }
 
-.paragraph {
-  font-size: 25px;
-  font-family: ubuntu;
+#question {
+  font-size: 30px;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+#answer {
+  font-style: normal;
+  font-size: 45px;
+  margin-top: 20px;
+  width: 1000px;
+  text-align: center;
 }

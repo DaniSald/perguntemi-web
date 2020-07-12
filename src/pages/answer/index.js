@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
+import { Link } from 'react-router-dom';
 import Api from '../../services/api';
 
 import './styles.css';
@@ -20,6 +21,20 @@ export default class Answer extends Component {
     this.getAnswer();
   }
 
+  getQuestion = () => {
+    const { location } = this.props;
+
+    let { question } = QueryString.parse(location.search);
+
+    const len = question.length - 1;
+
+    if (question.charAt(len) !== '?') {
+      question = `${question}?`;
+    }
+
+    return question;
+  }
+
   getAnswer = async () => {
     const result = await Api.getAnswer();
 
@@ -28,15 +43,20 @@ export default class Answer extends Component {
 
   render() {
     const { answer } = this.state;
-    const { location } = this.props;
 
-    const question = QueryString.parse(location.search);
+    const question = this.getQuestion();
 
     return (
-      <div className="answer">
+      <div className="answer_wrap">
         <img src={logo} alt="logo" height="100" />
-        <p className="paragraph">{`${question.question}`}</p>
-        <p className="paragraph">{`${answer}`}</p>
+        <p id="question">{`${question}`}</p>
+        <div>
+          <p id="answer">{`${answer}`}</p>
+        </div>
+        <div style={{ margin: 40, flexDirection: 'row' }}>
+          <Link to="/" className="button">Voltar</Link>
+          <button type="button" className="button" onClick={this.getAnswer}>Outra resposta</button>
+        </div>
       </div>
     );
   }

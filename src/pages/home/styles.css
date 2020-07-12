@@ -3,6 +3,11 @@
   src: url("../../assets/fonts/magnolia-script.regular.otf");
 }
 
+#desc {
+  font-style: italic;
+  opacity: 0.5;
+}
+
 .home {
   display: flex;
   align-items: center;
@@ -56,4 +61,37 @@
   background-color: #00a65d;
   color: #5c2d91;
   transition: 0.2s;
+}
+
+.header {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.tab {
+  margin: 20px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab_content {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: #5c2d91;
+  transition: 0.5s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tab_content:hover {
+  transition: 0.5s;
+  color: #00a65d;
 }

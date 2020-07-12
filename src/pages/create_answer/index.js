@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import randomId from 'rand-token';
+import { withRouter } from 'react-router-dom';
+import ProTypes from 'prop-types';
 import Api from '../../services/api';
 import './styles.css';
 
 const logo = require('../../assets/logo.png');
 
-export default class createAnswer extends Component {
+class createAnswer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,18 +31,30 @@ export default class createAnswer extends Component {
     this.setState({ answer: event.target.value });
   }
 
-  registerAnswer = async () => {
-    const { email, answer } = this.state;
-
+  registerAnswer = async (event) => {
     try {
-      await Api.post('/create/answer', { id: randomId.generate(20), email, answer });
+      event.preventDefault();
+      const { history } = this.props;
+
+      const { email, answer } = this.state;
+
+      const id = randomId.generate(20);
+      const emailToSend = email.toLowerCase().trim();
+      const answerToSend = answer.toLowerCase().trim();
+
+      const object = { id, email: emailToSend, answer: answerToSend };
+
+      await Api.createAnswer(object);
+
+      window.alert('Resposta Criada!');
+      history.push('/');
     } catch (error) {
       console.log(error);
     }
   }
 
   render() {
-    const { onWarnings } = this.state;
+    const { onWarnings, answer } = this.state;
 
     return (
       <div className="wrap">
@@ -53,7 +67,7 @@ export default class createAnswer extends Component {
                 <li className="list_item">
                   - Evite respostas triviais como "porque sim" e "talvez", seja criativo
                 </li>
-                <li className="list_item">- Ainda não é possível um usuário excluir uma resposta</li>
+                <li className="list_item">- Ainda não é possível editar ou excluir uma resposta</li>
                 <li className="list_item">- Mantenha o respeito</li>
                 <li className="list_item">- Divirtasi!</li>
               </ul>
@@ -63,16 +77,20 @@ export default class createAnswer extends Component {
           </div>
         ) : (
           <form onSubmit={this.registerAnswer} className="submit_form">
-            <div>
-              <label htmlFor="email">E-mail:</label>
-              <br />
-              <input className="fields" type="email" id="email" maxLength="100" onChange={this.getEmail} required />
-            </div>
+            <div style={{ marginTop: 30, marginBottom: 30 }}>
+              <div>
+                <label htmlFor="email">E-mail:</label>
+                <br />
+                <input className="fields email" type="email" maxLength="100" onChange={this.getEmail} autoComplete="off" required />
+              </div>
 
-            <div>
-              <label htmlFor="answer">Resposta:</label>
-              <br />
-              <textarea className="fields" id="answer" rows="3" minLength="10" maxLength="100" onChange={this.getAnswer} required />
+              <div>
+                <label htmlFor="answer">Resposta:</label>
+                <br />
+                <textarea className="fields answer" rows="3" minLength="10" maxLength="100" onChange={this.getAnswer} required />
+                <p style={100 - answer.length < 20 ? { color: 'red', fontWeight: 'bold' } : null}>{`Caracteres: ${100 - answer.length}`}</p>
+
+              </div>
             </div>
 
             <input type="submit" value="enviar" className="button" />
@@ -82,3 +100,9 @@ export default class createAnswer extends Component {
     );
   }
 }
+
+createAnswer.propTypes = {
+  history: ProTypes.object.isRequired,
+};
+
+export default withRouter(createAnswer);

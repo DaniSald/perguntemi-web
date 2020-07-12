@@ -8,6 +8,12 @@ const Api = {
 
     return result.data;
   },
+
+  async createAnswer(object) {
+    const result = await baseUrl.post('/create/answer', object);
+
+    return result;
+  },
 };
 
 export default Api;

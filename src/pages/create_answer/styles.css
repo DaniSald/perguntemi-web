@@ -15,13 +15,13 @@ h1 {
   resize: none;
 }
 
-#answer {
+.answer {
   font-size: 20px;
   width: 500px;
   overflow: hidden;
 }
 
-#email {
+.email {
   font-size: 20px;
   width: 500px;
 }
@@ -74,6 +74,10 @@ h1 {
   color: #00a65d;
   font-weight: bold;
   transition: 0.5s;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .button:hover {
