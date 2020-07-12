@@ -50,6 +50,7 @@ class createAnswer extends Component {
       history.push('/');
     } catch (error) {
       window.alert('Algo deu errado\nPor favor tente novamente.');
+      console.log(error);
     }
   }
 
