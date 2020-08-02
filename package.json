@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "elliptic": "^6.5.3",
     "express": "^4.17.1",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
     "rand-token": "^1.0.1",
